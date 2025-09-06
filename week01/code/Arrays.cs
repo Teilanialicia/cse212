@@ -40,6 +40,10 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
+        // Slice the array into two parts: one that goes from 0 to the total array count minus the amount rotated
+        // and then one that goes from the total array count minus the amount rotated to the end
+        // Concatenate the beginning slice onto the end slice and then put those values into the data List
+
         // Get the beginning slice and end slice
         List<int> beginningSlice = data.GetRange(0, data.Count - amount);
         List<int> endSlice = data.GetRange(data.Count - amount, amount);
