@@ -12,8 +12,18 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+        
+        // Create the array that is going to be returned. The length of the array will be the same as the number of multiples
+        double[] returnArray = new double[length];
+        
+        // Start a for loop to put every value in the array
+        for (int i = 0; i < length; i++)
+        {
+            // The multiples are the same as number*i so add that to the array at position i
+            returnArray[i] = number*(i+1);
+        }
 
-        return []; // replace this return statement with your own
+        return returnArray; // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +39,17 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // Get the beginning slice and end slice
+        List<int> beginningSlice = data.GetRange(0, data.Count - amount);
+        List<int> endSlice = data.GetRange(data.Count - amount, amount);
+
+        // Update the data list
+        var newArray = endSlice.Concat(beginningSlice).ToList();
+
+        for (int i = 0; i < newArray.Count; i++)
+        {
+            data[i] = newArray[i];
+        }
     }
 }
