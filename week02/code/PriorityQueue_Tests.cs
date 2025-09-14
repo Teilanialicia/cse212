@@ -5,25 +5,39 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 [TestClass]
 public class PriorityQueueTests
 {
+
     [TestMethod]
-    // Scenario: 
-    // Expected Result: 
-    // Defect(s) Found: 
-    public void TestPriorityQueue_1()
+    // Scenario: Enqueue multiple items with the same priority and Dequeue once.
+    // Expected Result: The item closest to the front of the queue will be removed and its value returned
+    // Defect(s) Found: It was furthest item with a matching highest priority.
+    public void TestPriorityQueue_DequeueTieBreaker()
     {
         var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
+        priorityQueue.Enqueue("A", 3);
+        priorityQueue.Enqueue("B", 3);
+        priorityQueue.Enqueue("C", 3);
+
+        var result = priorityQueue.Dequeue();
+
+        Assert.AreEqual("A", result);
     }
 
     [TestMethod]
-    // Scenario: 
-    // Expected Result: 
-    // Defect(s) Found: 
-    public void TestPriorityQueue_2()
+    // Scenario: Enqueue two items, then Dequeue twice.
+    // Expected Result: First "B" (Pri:5), then "A" (Pri:1). Queue should then be empty.
+    // Defect(s) Found: The Dequeue method does not remove items, so the same item can be dequeued repeatedly.
+    public void TestPriorityQueue_DequeueRemovesItem()
     {
         var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
-    }
+        priorityQueue.Enqueue("A", 1);
+        priorityQueue.Enqueue("B", 5);
 
-    // Add more test cases as needed below.
+        var first = priorityQueue.Dequeue();
+        Assert.AreEqual("B", first);
+
+        var second = priorityQueue.Dequeue();
+        Assert.AreEqual("A", second);
+
+        Assert.ThrowsException<InvalidOperationException>(() => priorityQueue.Dequeue());
+    }
 }
